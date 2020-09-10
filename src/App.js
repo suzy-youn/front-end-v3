@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Router } from "react-router-dom";
+import styled, { createGlobalStyle } from "styled-components";
+import history from "./history";
+import * as Pages from "./containers";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+export default class App extends Component {
+  render() {
+    return (
+      <>
+        <GlobalStyle />
+        <div className="App">
+          <Router history={history}>
+            <Route exact path="/" component={Pages.LoginPage} />
+            <Route path="/worklist" component={Pages.WorklistPage} />
+          </Router>
+        </div>
+      </>
+    );
+  }
 }
-
-export default App;
